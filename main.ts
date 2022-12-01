@@ -40,12 +40,13 @@ class MyStack extends TerraformStack {
     });
 
     const cloud_run_service = new google.cloudRunService.CloudRunService(this, 'cloud_run_service', {
+      autogenerateRevisionName: true,
       location: region,
       name: 'example',
       template: {
         spec: {
           containers: [{
-            image: '',
+            image: 'us-docker.pkg.dev/cloudrun/container/hello',
           }],
           serviceAccountName: service_account.email,
         },
